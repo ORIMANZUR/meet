@@ -45,6 +45,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>We need your location to show nearby vibes.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
