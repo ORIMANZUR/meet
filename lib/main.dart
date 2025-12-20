@@ -13,10 +13,30 @@ import 'package:meet/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const ProviderScope(child: MeetApp()));
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    runApp(const ProviderScope(child: MeetApp()));
+  } catch (e) {
+    runApp(MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.red,
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: SingleChildScrollView(
+              child: Text(
+                'STARTUP ERROR:\n$e',
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+        ),
+      ),
+    ));
+  }
 }
 
 final _router = GoRouter(
