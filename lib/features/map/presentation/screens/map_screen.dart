@@ -11,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../../../profile/data/storage_repository.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:geolocator/geolocator.dart';
 
 import 'package:meet/core/utils/marker_generator.dart';
 
@@ -26,6 +27,7 @@ class _MapScreenState extends ConsumerState<MapScreen> {
   String? _darkMapStyle;
   Set<Marker> _markers = {};
   bool _isUploading = false;
+  bool _hasPermission = false;
   // Cache for generated marker icons to verify performance
   final Map<String, BitmapDescriptor> _markerIconCache = {};
 
@@ -38,6 +40,21 @@ class _MapScreenState extends ConsumerState<MapScreen> {
   void initState() {
     super.initState();
     _loadMapStyle();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _checkPermission();
+    });
+  }
+
+  Future<void> _checkPermission() async {
+    final permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      final requested = await Geolocator.requestPermission();
+      if (requested == LocationPermission.always || requested == LocationPermission.whileInUse) {
+        if (mounted) setState(() => _hasPermission = true);
+      }
+    } else {
+      if (mounted) setState(() => _hasPermission = true);
+    }
   }
 
   Future<void> _loadMapStyle() async {
@@ -241,16 +258,24 @@ class _MapScreenState extends ConsumerState<MapScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          GoogleMap(
-            initialCameraPosition: _kInitialPosition,
-            onMapCreated: _onMapCreated,
-            markers: _markers,
-            myLocationButtonEnabled: false,
-            zoomControlsEnabled: false,
-            compassEnabled: false,
-            mapToolbarEnabled: false,
-            style: _darkMapStyle, 
-          ),
+          if (_hasPermission)
+            GoogleMap(
+              initialCameraPosition: _kInitialPosition,
+              onMapCreated: _onMapCreated,
+              markers: _markers,
+              myLocationButtonEnabled: false,
+              zoomControlsEnabled: false,
+              compassEnabled: false,
+              mapToolbarEnabled: false,
+              style: _darkMapStyle, 
+            )
+          else
+            Container(
+              color: const Color(0xFF141416),
+              child: const Center(
+                child: CircularProgressIndicator(color: Color(0xFFCCFF00)),
+              ),
+            ),
           
           // ... Rest of the UI
           
