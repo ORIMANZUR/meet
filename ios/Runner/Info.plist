@@ -44,6 +44,8 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>FLTEnableImpeller</key>
+	<false/>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
