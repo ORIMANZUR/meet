@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "318906357124",
+    "project_id": "meet-d88a7",
+    "storage_bucket": "meet-d88a7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:318906357124:android:ca7d0ffd8e4c970476f9d1",
+        "android_client_info": {
+          "package_name": "com.meet.app.meet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDefixQDXDjVI3KZMGqKDQPPHhwmjW8xiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
