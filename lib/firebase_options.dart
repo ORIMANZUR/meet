@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '318906357124',
     projectId: 'meet-d88a7',
     storageBucket: 'meet-d88a7.firebasestorage.app',
-    iosBundleId: 'com.meet.app.meet',
+    iosBundleId: 'com.orimanzur1.meet',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
