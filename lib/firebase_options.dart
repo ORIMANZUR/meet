@@ -60,11 +60,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDg-cWP3zuZCRSZC-YGfiDK389c046b7K4',
-    appId: '1:318906357124:ios:03e02fb782fa0fa876f9d1',
+    appId: '1:318906357124:ios:9af74dd3bd57cc7376f9d1',
     messagingSenderId: '318906357124',
     projectId: 'meet-d88a7',
     storageBucket: 'meet-d88a7.firebasestorage.app',
-    iosBundleId: 'com.meet.app.meet',
+    iosBundleId: 'com.orimanzur1.meet',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
