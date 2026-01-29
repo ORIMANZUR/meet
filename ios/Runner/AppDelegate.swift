@@ -13,7 +13,7 @@ import FirebaseCore
     // FirebaseApp.configure()
     
     // GMSServices.provideAPIKey("AIzaSyDtkiRSCRJgGQ9eKmbaeg9_GwcXY3Gvv4M")
-    // GeneratedPluginRegistrant.register(with: self)
+    GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
