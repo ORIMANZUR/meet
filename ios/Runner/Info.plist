@@ -58,6 +58,8 @@
 	<string>We need access to your photos to upload your vibe.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need access to your camera to capture your vibe.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to your microphone for video recording features.</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 </dict>
