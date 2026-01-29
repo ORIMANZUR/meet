@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class UserMarkerModel {
   final String id;
   final String name;
@@ -23,33 +21,9 @@ class UserMarkerModel {
     this.lastActive,
   });
 
-  factory UserMarkerModel.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>? ?? {};
-    final geo = data['location'] as GeoPoint? ?? const GeoPoint(0, 0);
-    return UserMarkerModel(
-      id: doc.id,
-      name: data['name'] ?? 'Anonymous',
-      latitude: geo.latitude,
-      longitude: geo.longitude,
-      vibe: data['vibe'] ?? '',
-      isOnline: data['isOnline'] ?? false,
-      avatarUrl: data['avatarUrl'] ?? 'https://i.pravatar.cc/150?u=anon',
-      storyImageUrl: data['storyImageUrl'],
-      lastActive: (data['lastActive'] as Timestamp?)?.toDate(),
-    );
-  }
-
-  Map<String, dynamic> toFirestore() {
-    return {
-      'name': name,
-      'location': GeoPoint(latitude, longitude),
-      'vibe': vibe,
-      'isOnline': isOnline,
-      'avatarUrl': avatarUrl,
-      'storyImageUrl': storyImageUrl,
-      'lastActive': FieldValue.serverTimestamp(),
-    };
-  }
+  // REMOVED FOR DIAGNOSTICS
+  // factory UserMarkerModel.fromFirestore(DocumentSnapshot doc) { ... }
+  // Map<String, dynamic> toFirestore() { ... }
 
   UserMarkerModel copyWith({
     String? name,
