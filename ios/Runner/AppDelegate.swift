@@ -13,7 +13,7 @@ import GoogleMaps
     // Initialize Firebase in Dart (main.dart) to avoid double-initialization crash
     // FirebaseApp.configure()
     
-    GMSServices.provideAPIKey("AIzaSyDg-cWP3zuZCRSZC-YGfiDK389c046b7K4")
+    GMSServices.provideAPIKey("AIzaSyDtkiRSCRJgGQ9eKmbaeg9_GwcXY3Gvv4M")
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
