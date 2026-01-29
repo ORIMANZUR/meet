@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import '../../data/chat_repository.dart';
 import '../../domain/models/chat_message_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -34,7 +34,6 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     final repo = ref.read(chatRepositoryProvider);
     await repo.sendMessage(widget.targetUserId, text);
     
-    // Scroll to bottom after sending
     if (_scrollController.hasClients) {
       _scrollController.animateTo(
         0, 
@@ -47,8 +46,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     final repo = ref.watch(chatRepositoryProvider);
-    final currentUserId = FirebaseAuth.instance.currentUser?.uid ?? '';
+    // MOCK USER ID
+    final currentUserId = 'mock_user_id';
 
+    // ... REMAINDER OF UI CODE IS SAME, JUST REMOVED FIREBASE IMPORT
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(

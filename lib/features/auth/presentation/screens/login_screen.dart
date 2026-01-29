@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 
@@ -19,56 +19,26 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _verifyPhone() async {
     setState(() => _isLoading = true);
-    String phone = _phoneController.text.trim();
-    // Basic formatting for demo: assume user types strict number, add +1 or prompt for it.
-    // Ideally use a phone number input package, but sticking to text for MVP.
-    // if (!phone.startsWith('+')) phone = "+1$phone"; 
-
-    try {
-      await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: phone,
-        verificationCompleted: (PhoneAuthCredential credential) async {
-          await FirebaseAuth.instance.signInWithCredential(credential);
-          if (mounted) context.go('/map');
-        },
-        verificationFailed: (FirebaseAuthException e) {
-          setState(() => _isLoading = false);
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed: ${e.message}")));
-        },
-        codeSent: (String verificationId, int? resendToken) {
-          setState(() {
-            _verificationId = verificationId;
-            _codeSent = true;
-            _isLoading = false;
-          });
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          _verificationId = verificationId;
-        },
-      );
-    } catch (e) {
-      setState(() => _isLoading = false);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Error: $e")));
-    }
+    
+    // MOCK LOGIN FOR DIAGNOSTICS
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {
+      _codeSent = true;
+      _isLoading = false;
+      _verificationId = "mock_verification_id";
+    });
   }
 
   Future<void> _signInWithOTP() async {
     setState(() => _isLoading = true);
-    try {
-      final credential = PhoneAuthProvider.credential(
-        verificationId: _verificationId!,
-        smsCode: _otpController.text,
-      );
-      await FirebaseAuth.instance.signInWithCredential(credential);
-      if (mounted) context.go('/map');
-    } catch (e) {
-      setState(() => _isLoading = false);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Invalid Code: $e")));
-    }
+    // MOCK VERIFY FOR DIAGNOSTICS
+    await Future.delayed(const Duration(seconds: 1));
+    if (mounted) context.go('/map');
   }
 
   @override
   Widget build(BuildContext context) {
+    // ... UI REMAINS THE SAME BUT WITHOUT FIREBASE TYPES ...
     final defaultPinTheme = PinTheme(
       width: 56,
       height: 56,

@@ -7,9 +7,9 @@ import 'features/map/presentation/screens/map_screen.dart';
 import 'features/profile/presentation/screens/profile_screen.dart';
 import 'features/chat/presentation/screens/chat_screen.dart';
 import 'features/auth/presentation/screens/login_screen.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:meet/firebase_options.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:meet/firebase_options.dart';
 
 // void main() {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -29,9 +29,9 @@ import 'package:meet/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    // await Firebase.initializeApp(
+    //   options: DefaultFirebaseOptions.currentPlatform,
+    // );
     final router = createRouter();
     runApp(ProviderScope(child: MeetApp(router: router)));
   } catch (e) {
@@ -59,13 +59,13 @@ GoRouter createRouter() {
   return GoRouter(
     initialLocation: '/map',
     redirect: (context, state) {
-      // If not logged in, always go to login
-      final user = FirebaseAuth.instance.currentUser;
-      final loggingIn = state.uri.toString() == '/login';
-      if (user == null && !loggingIn) return '/login';
+      // DIAGNOSTIC - Login Disabled
+      // final user = FirebaseAuth.instance.currentUser;
+      // final loggingIn = state.uri.toString() == '/login';
+      // if (user == null && !loggingIn) return '/login';
       
       // If logged in and at login page, go to map
-      if (user != null && loggingIn) return '/map';
+      // if (user != null && loggingIn) return '/map';
       
       return null;
     },

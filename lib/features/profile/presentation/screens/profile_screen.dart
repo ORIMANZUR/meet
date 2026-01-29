@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import '../../../map/presentation/providers/map_providers.dart';
 import '../../../map/domain/models/user_marker_model.dart';
@@ -32,35 +32,18 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _loadUserProfile() async {
-    final repo = ref.read(mapRepositoryProvider);
-    final user = await repo.getUserProfile();
-    
-    if (user != null) {
-      if(mounted) {
-        setState(() {
-          _isAvailable = user.isOnline;
-          _nameController.text = user.name;
-          _vibeController.text = user.vibe.isEmpty ? "Just chilling \uD83C\uDF03" : user.vibe;
-          _avatarUrl = user.avatarUrl;
-          _storyImageUrl = user.storyImageUrl;
-          _isLoading = false;
-        });
-      }
-    } else {
-      final authUser = FirebaseAuth.instance.currentUser;
-      if(mounted) {
-        setState(() {
-          _nameController.text = authUser?.phoneNumber ?? "New User";
-          _vibeController.text = "Just chilling \uD83C\uDF03";
-          _isLoading = false;
-        });
-      }
+    // MOCK PROFILE LOAD
+    if(mounted) {
+      setState(() {
+        _nameController.text = "Diagnostic User";
+        _vibeController.text = "Just chilling \uD83C\uDF03";
+        _isLoading = false;
+      });
     }
   }
 
   Future<void> _pickAndUploadStoryImage() async {
     final picker = ImagePicker();
-    // Pick an image
     final XFile? image = await picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
     
     if (image == null) return;
@@ -75,7 +58,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
         _storyImageUrl = downloadUrl;
         _isUploading = false;
       });
-      _saveProfile(); // Auto-save after upload
+      _saveProfile();
     } else {
       setState(() => _isUploading = false);
       if(mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Upload Failed")));
@@ -83,31 +66,15 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _saveProfile() async {
-    final repo = ref.read(mapRepositoryProvider);
-    final authUser = FirebaseAuth.instance.currentUser;
-    if (authUser == null) return;
-
-    final userModel = UserMarkerModel(
-      id: authUser.uid,
-      name: _nameController.text,
-      latitude: 0,
-      longitude: 0,
-      vibe: _vibeController.text,
-      isOnline: _isAvailable,
-      avatarUrl: _avatarUrl,
-      storyImageUrl: _storyImageUrl,
-      lastActive: DateTime.now(),
-    );
-    
-    await repo.updateUserStatus(userModel);
-
+    // Mock save
     if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Profile Saved!")));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Profile Saved! (Mock)")));
     }
   }
 
   Future<void> _logout() async {
-    await FirebaseAuth.instance.signOut();
+    // Mock logout
+    // await FirebaseAuth.instance.signOut();
     if(mounted) context.go('/login');
   }
 
