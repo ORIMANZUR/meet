@@ -11,34 +11,49 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meet/firebase_options.dart';
 
-void main() async {
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-    final router = createRouter();
-    runApp(ProviderScope(child: MeetApp(router: router)));
-  } catch (e) {
-    runApp(MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.red,
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: SingleChildScrollView(
-              child: Text(
-                'STARTUP ERROR:\n$e',
-                style: const TextStyle(color: Colors.white, fontSize: 16),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+  runApp(const MaterialApp(
+    home: Scaffold(
+      backgroundColor: Colors.blue,
+      body: Center(
+        child: Text(
+          'SAFE MODE - DIAGNOSTIC BUILD',
+          style: TextStyle(color: Colors.white, fontSize: 24),
         ),
       ),
-    ));
-  }
+    ),
+  ));
 }
+
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   try {
+//     await Firebase.initializeApp(
+//       options: DefaultFirebaseOptions.currentPlatform,
+//     );
+//     final router = createRouter();
+//     runApp(ProviderScope(child: MeetApp(router: router)));
+//   } catch (e) {
+//     runApp(MaterialApp(
+//       home: Scaffold(
+//         backgroundColor: Colors.red,
+//         body: Center(
+//           child: Padding(
+//             padding: const EdgeInsets.all(24.0),
+//             child: SingleChildScrollView(
+//               child: Text(
+//                 'STARTUP ERROR:\n$e',
+//                 style: const TextStyle(color: Colors.white, fontSize: 16),
+//                 textAlign: TextAlign.center,
+//               ),
+//             ),
+//           ),
+//         ),
+//       ),
+//     ));
+//   }
+// }
 
 GoRouter createRouter() {
   return GoRouter(

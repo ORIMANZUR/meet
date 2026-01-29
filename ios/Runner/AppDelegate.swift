@@ -10,11 +10,10 @@ import FirebaseCore
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     // Initialize Firebase BEFORE plugin registration
-    // Initialize Firebase in Dart (main.dart) to avoid double-initialization crash
-    FirebaseApp.configure()
+    // FirebaseApp.configure()
     
-    GMSServices.provideAPIKey("AIzaSyDtkiRSCRJgGQ9eKmbaeg9_GwcXY3Gvv4M")
-    GeneratedPluginRegistrant.register(with: self)
+    // GMSServices.provideAPIKey("AIzaSyDtkiRSCRJgGQ9eKmbaeg9_GwcXY3Gvv4M")
+    // GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
