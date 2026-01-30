@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
 // import GoogleMaps
-import FirebaseCore
+// import FirebaseCore
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
