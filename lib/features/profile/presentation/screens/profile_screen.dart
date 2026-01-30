@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
-import 'package:image_picker/image_picker.dart';
+// import 'package:image_picker/image_picker.dart';
 import '../../../map/presentation/providers/map_providers.dart';
 import '../../../map/domain/models/user_marker_model.dart';
 import '../../data/storage_repository.dart';
@@ -32,7 +32,6 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _loadUserProfile() async {
-    // MOCK PROFILE LOAD
     if(mounted) {
       setState(() {
         _nameController.text = "Diagnostic User";
@@ -43,43 +42,28 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   }
 
   Future<void> _pickAndUploadStoryImage() async {
-    final picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
+    // DIAGNOSTIC - MOCK PICKER
+    // final picker = ImagePicker();
+    // final XFile? image = await picker.pickImage(source: ImageSource.gallery, imageQuality: 70);
     
-    if (image == null) return;
-
-    setState(() => _isUploading = true);
-
-    final storageRepo = ref.read(storageRepositoryProvider);
-    final downloadUrl = await storageRepo.uploadStoryImage(File(image.path));
-
-    if (downloadUrl != null) {
-      setState(() {
-        _storyImageUrl = downloadUrl;
-        _isUploading = false;
-      });
-      _saveProfile();
-    } else {
-      setState(() => _isUploading = false);
-      if(mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Upload Failed")));
-    }
+    // if (image == null) return;
+    
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Image Picker Disabled")));
   }
 
   Future<void> _saveProfile() async {
-    // Mock save
     if (mounted) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Profile Saved! (Mock)")));
     }
   }
 
   Future<void> _logout() async {
-    // Mock logout
-    // await FirebaseAuth.instance.signOut();
     if(mounted) context.go('/login');
   }
 
   @override
   Widget build(BuildContext context) {
+    // UI REMAINS SAME
     if (_isLoading) {
       return const Scaffold(
         backgroundColor: Colors.black,
